@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPEG Resim İşleme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://source.unsplash.com/1600x900/?technology') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+            text-align: left;
+            color: #ccc;
+        }
+
+        input[type="file"],
+        input[type="number"],
+        input[type="text"],
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="file"],
+        input[type="number"],
+        input[type="text"] {
+            background: #222;
+            color: #fff;
+        }
+
+        button {
+            background: #ff5722;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #e64a19;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #bbb;
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleScaleOptions() {
+            const mode = document.querySelector('input[name="mode"]:checked').value;
+            document.getElementById('scale_percentage_section').classList.toggle('hidden', mode !== 'scale_percentage');
+            document.getElementById('custom_size_section').classList.toggle('hidden', mode !== 'custom_size');
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>JPEG İşleme Arayüzü</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+
+            <label for="file">JPEG Dosyanızı Yükleyin:</label>
+            <input type="file" id="file" name="file" accept=".jpg, .jpeg" required>
+
+            <label>Ölçekleme Modu:</label>
+            <label><input type="radio" name="mode" value="scale_percentage" onclick="toggleScaleOptions()" checked> Yüzdeyle Ölçekleme</label>
+            <label><input type="radio" name="mode" value="custom_size" onclick="toggleScaleOptions()"> En/Boy Belirterek Ölçekleme</label>
+
+            <div id="scale_percentage_section">
+                <label for="scale_percentage">Ölçekleme Yüzdesi (%):</label>
+                <input type="number" name="scale_percentage" id="scale_percentage" placeholder="Örn: 50 küçültür, 150 büyütür">
+            </div>
+
+            <div id="custom_size_section" class="hidden">
+                <label for="width">Yeni Genişlik (px):</label>
+                <input type="number" name="width" id="width" placeholder="Örn: 800">
+                <label for="height">Yeni Yükseklik (px):</label>
+                <input type="number" name="height" id="height" placeholder="Örn: 600">
+            </div>
+
+            <label for="quality">Kalite Yüzdesi(%):</label>
+            <input type="number" name="quality" id="quality" placeholder="Örn: 90 (yüksek kalite)" required>
+
+            <label for="output_name">Yeni Dosya Adı (uzantı gerekmez):</label>
+            <input type="text" name="output_name" id="output_name" placeholder="Örn: yeni_resim" required>
+
+            <button type="submit">İşle ve İndir</button>
+        </form>
+        <div class="footer">Resim sıkıştırma ve boyutlandırma arayüzü</div>
+    </div>
+</body>
+</html>
